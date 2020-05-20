@@ -16,6 +16,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 private ArrayList<String> target;
 private SimpleCursorAdapter adapter;
+MySQLite db = new MySQLite(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,6 @@ private SimpleCursorAdapter adapter;
         this.target = new ArrayList<String>();
         this.target.addAll(Arrays.asList(values));
 
-        MySQLite db = new MySQLite(this);
 
         this.adapter = new SimpleCursorAdapter(
                 this,
@@ -60,15 +60,18 @@ private SimpleCursorAdapter adapter;
     }
 
     @Override
-    protected void onActivityResult(
-            int requestCode, int resultCode, Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if(requestCode==1 && resultCode==RESULT_OK)
         {
             Bundle extras = data.getExtras();
-            String nowy = (String)extras.get("wpis");
-            target.add(nowy);
+            Animal nowy = (Animal)
+                    extras.getSerializable("nowy");
+
+            this.db.dodaj(nowy);
+            adapter.changeCursor(db.lista());
             adapter.notifyDataSetChanged();
+
         }
     }
 }
