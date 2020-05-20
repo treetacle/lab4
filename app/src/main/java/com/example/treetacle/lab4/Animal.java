@@ -21,13 +21,12 @@ public class Animal implements Serializable {
         this.gatunek = gatunek;
         this.kolor = kolor;
         this.wielkosc = wielkosc;
-        this.opis = opis
+        this.opis = opis;
     }
 
     @Override
     public String toString(){
-        return "Zwierze: [id=" + id + ", gatunek=" + gatunek
-                + ", kolor=" + kolor + " wielkosc=" + wielkosc + "]";
+        return "Zwierze: [id=" + id + ", gatunek=" + gatunek + ", kolor=" + kolor + " wielkosc=" + wielkosc + "]";
     }
 
     public String getOpis(){ return opis; }
